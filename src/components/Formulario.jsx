@@ -3,6 +3,8 @@ import Card from './Card';
 import styles from "./styles.module.css"
 
 const Formulario = (props) => {
+
+    // Hooks// 
     const [listaUsuario, setListaUsuario] = useState([]);
     const [usuario, setUsuario] = useState({
         nombre: "",
@@ -10,31 +12,33 @@ const Formulario = (props) => {
         favorito:false,
         edad: ""
     });
-const [VerError, setVerError]=useState("");
+    const [VerError, setVerError]=useState("");
 
-/// onChanges ///
-const onChangeNombre=(e)=>setUsuario({...usuario, nombre:e.target.value});
-const onChangePass=(e)=>setUsuario({...usuario, password:e.target.value});
-const onChangeFav=(e)=>setUsuario({...usuario, favorito:e.target.checked});
-const onChangeEdad=(e)=>setUsuario({...usuario, edad:e.target.value});
+    /// onChanges ///
+    const onChangeNombre=(e)=>setUsuario({...usuario, nombre:e.target.value});
+    const onChangePass=(e)=>setUsuario({...usuario, password:e.target.value});
+    const onChangeFav=(e)=>setUsuario({...usuario, favorito:e.target.checked});
+    const onChangeEdad=(e)=>setUsuario({...usuario, edad:e.target.value});
 
 
 
-/// VALIDACIONES ////
-const validarNombre=(n)=>{
-    const nSinEspacio = n.trim();
-    let esNombreValido= false;
-        if (nSinEspacio.length >= 3) {
-            esNombreValido= true;
-        } else {
-            setVerError("")
-            // setErrorSelect(true);
-            alert("Ingrese un nombre válido.");
-            // setBotonDeshabilitado(false); 
-            esNombreValido= false
-        };
-    return esNombreValido;
-};
+    /// VALIDACIONES ////
+    const validarNombre=(n)=>{
+        let esNombreValido= false;
+        if(n[0] ==" "){
+            esNombreValido=false
+        }
+        const nSinEspacio = n.trim();
+        
+            if (nSinEspacio.length >= 3) {
+                esNombreValido= true;
+            } else {
+                setVerError("Por favor chequea que la información sea correcta");
+                alert("Ingrese un nombre válido.");
+                esNombreValido= false;
+            };
+        return esNombreValido;
+    };
 
 const validarPass=(p)=>{
     let esPassValido= false;
@@ -48,8 +52,7 @@ const validarPass=(p)=>{
             } else {
             return true;}
         });
-        // Validamos la extension y que haya al menos un numero
-        if (pSinEspacios.length > 7 && hasNumber) {
+        if (pSinEspacios.length >=6  && hasNumber) {
             esPassValido= true;
         } else {
             setVerError("Por favor chequea que la información sea correcta");
@@ -60,7 +63,6 @@ const validarPass=(p)=>{
     };
 
     const validarEdad=(ed)=>{
-        // const edadSinEspacios = ed.trim();
         let resultadoVal = false;
         if (ed < 99 && ed > 18){
             resultadoVal = true;
@@ -93,7 +95,6 @@ const validarPass=(p)=>{
                 edad: ""
             });
             setVerError("Por favor chequea que la información sea correcta");
-            // setBotonDeshabilitado(false); 
         }
       }
 
@@ -164,38 +165,15 @@ const validarPass=(p)=>{
         </div>
 
 
-    <input type="submit" value="Guardar" />
-    {/* <input type="submit" value="Guardar" onClick={agregarUser}/> */}
+    <input type="submit" value="Enviar" />
 
     </form>
     <div className={styles.error}>{VerError}</div>
 
 
-    {/* {listaUsuario.map((user, index)=>{
-        return(
-                <Card>
-                    <h3 key={index} name={user.nombre}></h3>
-                    <h4 key={index} age={user.edad}></h4>
-                    <h4 key={index} fav={user.favorito}></h4>
-                </Card>
-            )
-        })} */}
-
-{/* ESTA OK */}
-    {/* {listaUsuario.map((user, index)=>{
-        return(
-                <div key={index}>
-                    <h3 >{user.nombre}</h3>
-                    <h4 >{user.edad}</h4>
-                    <h4 >{user.favorito?"Es Favorito!!!":"No es Favorito"}</h4>
-                </div>
-            )
-        })} */}
-
     {listaUsuario.map((user, index)=>{
         return(
                 <Card key={index} usuario={user}/>
-         
             )
         })} 
 
