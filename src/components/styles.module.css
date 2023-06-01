@@ -1,0 +1,44 @@
+.comentario{
+    font-size: 14px;
+    color: red;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    align-items:stretch;
+    flex-wrap: wrap;
+    margin: 1rem;
+    border:solid 1px rgb(68, 68, 68);
+
+    padding: 0.5rem;
+    /* max-width: 600px; */
+}
+
+.campos{
+    /* margin: 0.5rem; */
+    width: 359px;
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem;
+    /* border:solid 1px violet; */
+
+  
+}
+
+input{
+    width: 15rem;
+}
+
+.error{
+    width: 359px;
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem;
+    color: red;
+    font-size: 14px;
+    /* border:solid 1px red; */
+}
